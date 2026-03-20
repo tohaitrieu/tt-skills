@@ -66,10 +66,19 @@ Read `references/content-templates.md` for structure.
 ### SEO Quality Checklist (Yoast-based)
 
 **Keyword Matching (Vietnamese):**
-- Vietnamese KHÔNG hỗ trợ word form recognition
-- Sử dụng **exact match** hoặc **contains**
-- Keyword "trading forex" match: "trading forex", "về trading forex", "trading forex là gì"
-- KHÔNG match: "trade forex", "forex trading" (khác thứ tự)
+Vietnamese không hỗ trợ word form recognition. Dùng **Scattered Word Match**:
+
+**Algorithm:**
+1. Tách keyword thành từ: "Giao dịch ngoại hối" → [giao, dịch, ngoại, hối]
+2. Check câu chứa TẤT CẢ các từ (bất kỳ thứ tự, có thể rời rạc)
+
+**Examples (keyword: "Giao dịch ngoại hối"):**
+| Sentence | Match | Reason |
+|----------|-------|--------|
+| "Giao dịch trên thị trường ngoại hối rất tuyệt" | ✅ | Có đủ 4 từ |
+| "Giao điểm được dịch chuyển khi vốn ngoại và kiều hối đổ về" | ✅ | Có: giao, dịch, ngoại, hối |
+| "Hối hận khi giao dịch các cặp tiền ngoại lai" | ✅ | Có đủ 4 từ (rời rạc) |
+| "Giao dịch forex rất khó" | ❌ | Thiếu: ngoại, hối |
 
 **Keyphrase Checks:**
 | Criteria | Requirement | Weight |
