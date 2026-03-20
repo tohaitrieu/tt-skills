@@ -3,3 +3,4 @@
 .env
 .cache/
 node_modules/
+.env
