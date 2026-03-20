@@ -13,14 +13,14 @@ if [ -f "$ENV_FILE" ]; then
 fi
 
 GSC_SITE_URL="${GSC_SITE_URL:-https://totrieu.com}"
-GSC_CREDENTIALS="$GSC_SERVICE_ACCOUNT_JSON"
+GSC_CREDENTIALS_FILE="${GSC_SERVICE_ACCOUNT_FILE:-$HOME/.secrets/gsc-service-account.json}"
 
 # Calculate date range (last 28 days)
 END_DATE=$(date +%Y-%m-%d)
 START_DATE=$(date -v-28d +%Y-%m-%d 2>/dev/null || date -d "28 days ago" +%Y-%m-%d)
 
 # Get access token
-ACCESS_TOKEN=$(echo "$GSC_CREDENTIALS" | python3 -c "
+ACCESS_TOKEN=$(cat "$GSC_CREDENTIALS_FILE" | python3 -c "
 import sys, json
 from google.oauth2 import service_account
 from google.auth.transport.requests import Request
