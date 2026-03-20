@@ -5,20 +5,20 @@
 set -e
 
 ARTICLE_PATH="$1"
-INFISICAL_URL="http://localhost:8080/api/v3/secrets"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ENV_FILE="${SCRIPT_DIR}/../../../.env"
 
 if [ -z "$ARTICLE_PATH" ]; then
   echo "Usage: ./publish-to-cms.sh <article-path>"
   exit 1
 fi
 
-# Get secrets from Infisical
-get_secret() {
-  curl -s "${INFISICAL_URL}/$1" -H "Authorization: Bearer ${INFISICAL_TOKEN}" | jq -r '.secret.secretValue'
-}
+# Load .env
+if [ -f "$ENV_FILE" ]; then
+  export $(grep -v '^#' "$ENV_FILE" | xargs)
+fi
 
-CMS_API_URL=$(get_secret "CMS_API_URL")
-CMS_API_KEY=$(get_secret "CMS_API_KEY")
+CMS_API_URL="${CMS_API_URL:-https://cms.totrieu.com/api}"
 
 # Parse frontmatter and content
 parse_article() {

@@ -1,18 +1,19 @@
 #!/bin/bash
 # Fetch keywords from Google Search Console API
-# Requires: GSC_SERVICE_ACCOUNT_JSON, GSC_SITE_URL in Infisical
+# Load from .env file
 
 set -e
 
-INFISICAL_URL="http://localhost:8080/api/v3/secrets"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ENV_FILE="${SCRIPT_DIR}/../../../.env"
 
-# Get secrets from Infisical
-get_secret() {
-  curl -s "${INFISICAL_URL}/$1" -H "Authorization: Bearer ${INFISICAL_TOKEN}" | jq -r '.secret.secretValue'
-}
+# Load .env
+if [ -f "$ENV_FILE" ]; then
+  export $(grep -v '^#' "$ENV_FILE" | xargs)
+fi
 
-GSC_SITE_URL=$(get_secret "GSC_SITE_URL")
-GSC_CREDENTIALS=$(get_secret "GSC_SERVICE_ACCOUNT_JSON")
+GSC_SITE_URL="${GSC_SITE_URL:-https://totrieu.com}"
+GSC_CREDENTIALS="$GSC_SERVICE_ACCOUNT_JSON"
 
 # Calculate date range (last 28 days)
 END_DATE=$(date +%Y-%m-%d)
