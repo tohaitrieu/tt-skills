@@ -63,6 +63,39 @@ Read `references/content-templates.md` for structure.
 - Include internal links
 - Practical examples from VN market
 
+### SEO Quality Checklist (Yoast-based)
+
+**Keyphrase (Score mỗi mục 0-10):**
+| Criteria | Requirement | Weight |
+|----------|-------------|--------|
+| In Title | Keyword xuất hiện trong title | 15% |
+| In Meta Description | 120-156 chars, có keyword | 10% |
+| In Introduction | 100 từ đầu tiên | 10% |
+| In Subheadings | Ít nhất 1 H2/H3 có keyword | 10% |
+| Density | 1-2% (không quá 3%) | 15% |
+
+**Readability:**
+| Criteria | Requirement | Weight |
+|----------|-------------|--------|
+| Sentence Length | Avg ≤20 từ/câu | 10% |
+| Paragraph Length | ≤150 từ/đoạn | 5% |
+| Passive Voice | <10% câu bị động | 5% |
+| Transition Words | >30% câu có từ chuyển tiếp | 5% |
+| Subheading Distribution | Mỗi 300 từ có H2/H3 | 5% |
+
+**Structure:**
+| Criteria | Requirement | Weight |
+|----------|-------------|--------|
+| Text Length | 1500-2500 từ | 5% |
+| Internal Links | ≥3 links | 5% |
+| Images | Có alt text | 5% |
+
+**Total Score:**
+- 90-100: Excellent (Green)
+- 70-89: Good (Light Green)
+- 50-69: OK (Orange)
+- <50: Needs Improvement (Red)
+
 ### 4. Save to TT-Contents
 
 Folder mapping (see `references/tt-contents-structure.md`):
