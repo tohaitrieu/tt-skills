@@ -100,12 +100,54 @@ On approval:
 
 Creates draft in Payload CMS.
 
+## Discord Workflow
+
+### Channels
+| Channel | ID | Purpose |
+|---------|-----|---------|
+| Work | 1484382845744185364 | Tạo thread, cập nhật tiến độ |
+| Report | 1480189760910786560 | Báo cáo hoàn thành |
+
+### Flow
+1. **Nhận task** → Tạo thread trong Work channel
+2. **Trong thread**:
+   - Cập nhật từng bước: "🔍 Đang phân tích keywords..."
+   - Thảo luận nếu cần input
+   - Đính kèm draft để review
+3. **Hoàn thành** → Post summary tại Report channel với link thread
+
+### Thread Format
+```
+📋 SEO Task: {keyword}
+Status: 🟡 In Progress
+
+Progress:
+- ✅ Keyword analysis
+- ✅ Outline created
+- 🔄 Writing article...
+- ⏳ Review pending
+- ⏳ Publish to CMS
+```
+
+### Completion Report (Report channel)
+```
+✅ SEO Task Complete
+
+Keyword: {keyword}
+Article: {title}
+File: {github_url}
+Thread: {thread_url}
+
+Status: Draft published to CMS
+```
+
 ## Integration
 
 | Service | Method |
 |---------|--------|
 | GSC API | `scripts/fetch-gsc-keywords.sh` |
 | Infisical | `http://localhost:8080/api/v3/secrets/` |
-| Discord | OpenClaw channel integration |
+| Discord Work | Channel 1484382845744185364 (threads) |
+| Discord Report | Channel 1480189760910786560 (completion) |
 | Payload CMS | `scripts/publish-to-cms.sh` |
 | TT-Contents | Git operations |
