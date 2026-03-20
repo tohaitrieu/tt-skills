@@ -1,0 +1,40 @@
+name: Deploy Skills to Mac Mini
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+      - 'shared/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Mac Mini
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ssh.totrieu.com
+          username: totrieu
+          key: ${{ secrets.MAC_MINI_SSH_KEY }}
+          proxy_host: ssh.totrieu.com
+          proxy_username: totrieu
+          proxy_key: ${{ secrets.MAC_MINI_SSH_KEY }}
+          script: |
+            cd ~/tt-skills || git clone https://github.com/tohaitrieu/tt-skills.git ~/tt-skills
+            cd ~/tt-skills && git pull origin main
+
+            # Symlink skills to OpenClaw workspace
+            for skill in ~/tt-skills/skills/*/; do
+              skill_name=$(basename "$skill")
+              target=~/.openclaw/workspace/skills/$skill_name
+              if [ ! -L "$target" ]; then
+                ln -sf "$skill" "$target"
+                echo "Linked: $skill_name"
+              fi
+            done
+
+            # Restart OpenClaw gateway to load new skills
+            openclaw gateway restart
