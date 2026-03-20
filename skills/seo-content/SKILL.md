@@ -65,10 +65,16 @@ Read `references/content-templates.md` for structure.
 
 ### SEO Quality Checklist (Yoast-based)
 
-**Keyphrase (Score mỗi mục 0-10):**
+**Keyword Matching (Vietnamese):**
+- Vietnamese KHÔNG hỗ trợ word form recognition
+- Sử dụng **exact match** hoặc **contains**
+- Keyword "trading forex" match: "trading forex", "về trading forex", "trading forex là gì"
+- KHÔNG match: "trade forex", "forex trading" (khác thứ tự)
+
+**Keyphrase Checks:**
 | Criteria | Requirement | Weight |
 |----------|-------------|--------|
-| In Title | Keyword xuất hiện trong title | 15% |
+| In Title | Keyword xuất hiện (exact/contains) | 15% |
 | In Meta Description | 120-156 chars, có keyword | 10% |
 | In Introduction | 100 từ đầu tiên | 10% |
 | In Subheadings | Ít nhất 1 H2/H3 có keyword | 10% |
